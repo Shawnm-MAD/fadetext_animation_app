@@ -45,6 +45,7 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
   Color _textColor = Colors.black;
   bool _showFrame = false;
+  double _rotation = 0;
 
   void toggleVisibility() {
     setState(() {
@@ -102,6 +103,22 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
     ),
   );
 }
+
+// Build rotating image
+  Widget _buildRotatingImage() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _rotation += 0.1;
+        });
+      },
+      child: AnimatedRotation(
+        turns: _rotation,
+        duration: const Duration(seconds: 1),
+        child: Image.asset('assets/your_image.png'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
