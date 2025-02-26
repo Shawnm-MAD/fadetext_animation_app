@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: FadingTextAnimation(
         toggleTheme: toggleTheme,
@@ -64,7 +65,7 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Pick a text color"),
+          title: const Text("Pick a text color"),
           content: SingleChildScrollView(
             child: ColorPicker(
               pickerColor: _textColor,
@@ -75,7 +76,7 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
           ),
           actions: [
             TextButton(
-              child: Text("Select"),
+              child: const Text("Select"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -86,25 +87,27 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
     );
   }
 
-// Build image with rounded corners and optional frame
   Widget _buildImage() {
-  return GestureDetector(
-    onTap: toggleVisibility,
-    child: AnimatedOpacity(
-      opacity: _isVisible ? 1.0 : 0.0,
-      duration: const Duration(seconds: 1),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: _showFrame ? Border.all(color: Colors.blue, width: 5) : null,
+    return GestureDetector(
+      onTap: toggleVisibility,
+      child: AnimatedOpacity(
+        opacity: _isVisible ? 1.0 : 0.0,
+        duration: const Duration(seconds: 1),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: _showFrame ? Border.all(color: Colors.blue, width: 5) : null,
+          ),
+          child: Image.asset(
+            'assets/images/436-4361094_imagenes-random-png.png',
+            width: 200,
+            height: 200,
+          ),
         ),
-        child: Image.asset('assets/images/436-4361094_imagenes-random-png.png'),
       ),
-    ),
-  );
-}
+    );
+  }
 
-// Build rotating image
   Widget _buildRotatingImage() {
     return GestureDetector(
       onTap: () {
@@ -115,7 +118,11 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
       child: AnimatedRotation(
         turns: _rotation,
         duration: const Duration(seconds: 1),
-        child: Image.asset('assets/images/436-4361094_imagenes-random-png.png'),
+        child: Image.asset(
+          'assets/images/436-4361094_imagenes-random-png.png',
+          width: 200,
+          height: 200,
+        ),
       ),
     );
   }
@@ -124,10 +131,10 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fading Text Animation'),
+        title: const Text('Fading Text Animation'),
         actions: [
           IconButton(
-            icon: Icon(Icons.color_lens),
+            icon: const Icon(Icons.color_lens),
             onPressed: showColorPickerDialog,
           ),
           IconButton(
@@ -137,24 +144,23 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
         ],
       ),
       body: Center(
-        child:  Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          AnimatedOpacity(
-          opacity: _isVisible ? 1.0 : 0.0,
-          duration: Duration(seconds: 2),
-          curve: Curves.easeInOut, // Adding a curve for smoother animation
-          child: Text(
-            'Flutter is Awesome!',
-            style: TextStyle(fontSize: 24, color: _textColor),
-          ),
-        ),
-        SizedBox(height: 20),
-            // Rotating Image
+            AnimatedOpacity(
+              opacity: _isVisible ? 1.0 : 0.0,
+              duration: const Duration(seconds: 2),
+              curve: Curves.easeInOut,
+              child: Text(
+                'Flutter is Awesome!',
+                style: TextStyle(fontSize: 24, color: _textColor),
+              ),
+            ),
+            const SizedBox(height: 20),
             _buildRotatingImage(),
-            SizedBox(height: 20),
-        SwitchListTile(
-              title: Text('Show Frame'),
+            const SizedBox(height: 20),
+            SwitchListTile(
+              title: const Text('Show Frame'),
               value: _showFrame,
               onChanged: (bool value) {
                 setState(() {
@@ -162,14 +168,13 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
                 });
               },
             ),
-            // Image with optional frame
             _buildImage(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: toggleVisibility,
-        child: Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
