@@ -27,12 +27,13 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-ddependencies:
+dependencies:
   flutter:
     sdk: flutter
+  flutter_colorpicker: ^1.0.3  # Moved here from dev_dependencies
 
   cupertino_icons: ^1.0.8
-  flutter_colorpicker: ^1.0.3  # Moved here from dev_dependencies
+  
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +53,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 dependencies:
-  flutter_colorpicker: ^1.1.0
 
   # To add assets to your application, add an assets section, like this:
   # assets:
