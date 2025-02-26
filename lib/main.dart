@@ -115,7 +115,7 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
       child: AnimatedRotation(
         turns: _rotation,
         duration: const Duration(seconds: 1),
-        child: Image.asset('assets/your_image.png'),
+        child: Image.asset('assets/images/436-4361094_imagenes-random-png.png'),
       ),
     );
   }
@@ -137,7 +137,10 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
         ],
       ),
       body: Center(
-        child: AnimatedOpacity(
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          AnimatedOpacity(
           opacity: _isVisible ? 1.0 : 0.0,
           duration: Duration(seconds: 2),
           curve: Curves.easeInOut, // Adding a curve for smoother animation
@@ -146,6 +149,10 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
             style: TextStyle(fontSize: 24, color: _textColor),
           ),
         ),
+        SizedBox(height: 20),
+            // Rotating Image
+            _buildRotatingImage(),
+            SizedBox(height: 20),
         SwitchListTile(
               title: Text('Show Frame'),
               value: _showFrame,
@@ -159,7 +166,6 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
             _buildImage(),
           ],
         ),
-      ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: toggleVisibility,
