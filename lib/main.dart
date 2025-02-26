@@ -44,6 +44,7 @@ class FadingTextAnimation extends StatefulWidget {
 class _FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
   Color _textColor = Colors.black;
+  bool _showFrame = false;
 
   void toggleVisibility() {
     setState(() {
@@ -84,6 +85,24 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
     );
   }
 
+// Build image with rounded corners and optional frame
+  Widget _buildImage() {
+  return GestureDetector(
+    onTap: toggleVisibility,
+    child: AnimatedOpacity(
+      opacity: _isVisible ? 1.0 : 0.0,
+      duration: const Duration(seconds: 1),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: _showFrame ? Border.all(color: Colors.blue, width: 5) : null,
+        ),
+        child: Image.asset('assets/images/436-4361094_imagenes-random-png.png'),
+      ),
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,10 +125,24 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
           duration: Duration(seconds: 2),
           curve: Curves.easeInOut, // Adding a curve for smoother animation
           child: Text(
-            'Fultter is Awesome!',
+            'Flutter is Awesome!',
             style: TextStyle(fontSize: 24, color: _textColor),
           ),
         ),
+        SwitchListTile(
+              title: Text('Show Frame'),
+              value: _showFrame,
+              onChanged: (bool value) {
+                setState(() {
+                  _showFrame = value;
+                });
+              },
+            ),
+            // Image with optional frame
+            _buildImage(),
+          ],
+        ),
+      ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: toggleVisibility,
